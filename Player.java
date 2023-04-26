@@ -1,5 +1,6 @@
 import java.util.*;
-public class Player {
+
+public class Player{
     public static final int PIT_SIZE = 6;
     private ArrayList<Integer> pits;
     private int finalScore;
@@ -16,16 +17,20 @@ public class Player {
         finalScore += scoreToAdd;
     }
 
-    public void addStone(int stoneToAdd, int startingPitNum){
-        int temp = 1;
+    public ArrayList<Integer> getPits(){
+        return pits;
+    }
+    public int addStone(int startingPitNum, int numOfStones){
+        int stones = 1;
         for(int i = startingPitNum; i < pits.size(); i++){
-            pits.set(i, temp);
-            temp++;
+            pits.set(i, stones);
+            stones++;
         }
-        if (temp > 0){
+        if (stones > 0 && stones < numOfStones){
             addScore(1);
-            temp--;
+            stones--;
         }
+        return stones;
     }
 
     // Done at the beginning of the game

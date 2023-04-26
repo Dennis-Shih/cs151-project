@@ -1,5 +1,6 @@
 import java.util.*;
 import javax.swing.event.*;
+
 public class MancalaBoard {
     private Player p1;
     private Player p2;
@@ -17,7 +18,7 @@ public class MancalaBoard {
             p2.setStone(numOfStones);
         }
         else {
-            throw new IllegalArgumentException("The number of stones must either be 3 or 4 stones in each pit");
+            throw new IllegalArgumentException("The number of stones must either be 3 or 4 stones in each pit!");
         }
         ChangeEvent e = new ChangeEvent(this);
         for(ChangeListener l: listeners){
@@ -25,8 +26,43 @@ public class MancalaBoard {
         }
     }
 
-    public void addStone(int startingPit){
+    public void addStone(int startingPit, Player p){
+        if (p.equals(p1)) {
+            int returnStones = p1.addStone(startingPit, p1.getPits().get(startingPit));
+            if (returnStones > 0) {
+                p2.addStone(0, p2.getPits().get(0));
+            }
+        }
+        else if (p.equals(p2)){
+            int returnStones = p2.addStone(startingPit, p2.getPits().get(startingPit));
+            if (returnStones > 0){
+                p1.addStone(0, p2.getPits().get(0));
+            }
+        }
+        ChangeEvent e = new ChangeEvent(this);
+        for (ChangeListener l: listeners){
+            l.stateChanged(e);
+        }
+    }
 
+    public boolean finishRound(){
+        int remaining1 = 0;
+        int remaining2 = 0;
+        for(int stones: p1.getPits()){
+            remaining1 += stones;
+        }
+        for (int stones2: p2.getPits()){
+            remaining2 += stones2;
+        }
+        if (remaining1 == 0){
+            p2.addScore(remaining2);
+            return true;
+        }
+        else if (remaining2 == 0){
+            p1.addScore(remaining1);
+            return true;
+        }
+        return false;
     }
 
     public String declareWinner() {
@@ -39,7 +75,7 @@ public class MancalaBoard {
             return "Player 2 wins the game.";
         }
         else {
-            return "The match is a tie-match.";
+            return "The match ends in a tie.";
         }
     }
 
