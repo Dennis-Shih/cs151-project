@@ -1,9 +1,17 @@
 import java.util.*;
 
-public class Player{
+/**
+ * @author Aung Paing Soe, Dennis Shih
+ *
+ */
+public class Player {
     public static final int PIT_SIZE = 6;
     private ArrayList<Integer> pits;
     private int finalScore;
+    private Integer selectedPit;
+    
+    private int numUndos;
+    
 
     public Player() {
         pits = new ArrayList<>();
@@ -32,6 +40,11 @@ public class Player{
         }
         return stones;
     }
+    
+    public Integer getSelectedPit() {
+		return selectedPit;
+    	
+    }
 
     // Done at the beginning of the game
     public void setStone(int stones){
@@ -39,4 +52,11 @@ public class Player{
             pits.add(stones);
         }
     }
+	public int getNumUndos() {
+		return numUndos;
+	}
+	public void setNumUndos(int numUndos) {
+		this.numUndos = numUndos;
+	}
+	
 }
