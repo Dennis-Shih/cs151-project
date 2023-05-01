@@ -2,16 +2,25 @@ import java.util.*;
 import javax.swing.event.*;
 
 /**
- * @author Aung Paing Soe, Dennis Shih
+ * Group Project MancalaBoard.java File
  *
+ * @author Aung Paing Soe, Dennis Shih
+ * @version 1.0 5/5/2023
+ */
+
+/**
+ * A Java class that models the functions of a mancala board
  */
 public class MancalaBoard {
 	private Player p1;
 	private Player p2;
 	private ArrayList<ChangeListener> listeners;
-	final int MAX_UNDOS =3;
+	final int MAX_UNDOS = 3;
 	private int turn;
 
+	/**
+	 * Constructs the MancalaBoard object by initializing two Player objects and a ChangeListener ArrayList.
+	 */
 	public MancalaBoard() {
 		p1 = new Player();
 		p2 = new Player();
@@ -19,17 +28,32 @@ public class MancalaBoard {
 		listeners = new ArrayList<>();
 	}
 
+	/**
+	 * Sets the turn of the player for a game
+	 *
+	 * @param p	Player to indicate which turn it is
+	 */
 	private void setTurn(Player p) {
 		if (p.equals(p1)) {
 			turn=1;
 		} else turn=2;	
 	}
-	
+
+	/**
+	 * Return the player associated with the turn
+	 *
+	 * @return the player associated with the turn
+	 */
 	private Player getTurn() {
 		if (turn==1) return p1;
 		else return p2;
 	}
 
+	/**
+	 * Sets the number of stones in each pit of the mancala board
+	 *
+	 * @param numOfStones the number of stones to start the game with
+	 */
 	public void setStone(int numOfStones) {
 		if (numOfStones == 3 || numOfStones == 4) {
 			p1.setStone(numOfStones);
@@ -43,6 +67,12 @@ public class MancalaBoard {
 		}
 	}
 
+	/**
+	 * Adds one stone each in the pit after a player picks up all the stones from one pit
+	 *
+	 * @param startingPit the pit number that the players pick up first
+	 * @param p	the player that picks up the stones
+	 */
 	public void addStone(int startingPit, Player p) {
 		if (p.equals(p1)) {
 			int returnStones = p1.addStone(startingPit, p1.getPits().get(startingPit));
@@ -61,6 +91,11 @@ public class MancalaBoard {
 		}
 	}
 
+	/**
+	 * Determines when the round is finished
+	 *
+	 * @return a boolean value of true if it is finished; false otherwise
+	 */
 	public boolean finishRound() {
 		int remaining1 = 0;
 		int remaining2 = 0;
@@ -80,6 +115,11 @@ public class MancalaBoard {
 		return false;
 	}
 
+	/**
+	 * Declares the winner of the round based on the two players' scores
+	 *
+	 * @return A string indicating which player win or a tie match
+	 */
 	public String declareWinner() {
 		int finalScore1 = p1.getFinalScore();
 		int finalScore2 = p2.getFinalScore();
