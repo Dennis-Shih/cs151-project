@@ -27,6 +27,13 @@ public class MancalaBoard {
 		setTurn(p1);
 		listeners = new ArrayList<>();
 	}
+	/**
+	 * Attaches the change listener to the board
+	 * @param c - ChangeListener to attach
+	 */
+	public void attach(ChangeListener c) {
+		listeners.add(c);
+	}
 
 	/**
 	 * Sets the turn of the player for a game
@@ -138,7 +145,7 @@ public class MancalaBoard {
 	 */
 	public void undo() {
 		int numUndos=getTurn().getNumUndos();
-		if (numUndos < 3 && getTurn().getSelectedPit() != -1) {
+		if (numUndos < MAX_UNDOS && getTurn().getSelectedPit() != -1) {
 			getTurn().setSelectedPit(-1);
 			getTurn().setNumUndos(++numUndos);
 			System.out.println("Move undone"); 

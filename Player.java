@@ -16,7 +16,9 @@ public class Player {
     private int finalScore;
     private Integer selectedPit;
     
-    private int numUndos;
+   
+
+	private int numUndos;
 
 
     /**
@@ -83,6 +85,10 @@ public class Player {
 		return selectedPit;
     	
     }
+    
+    public void setSelectedPit(Integer selectedPit) {
+		this.selectedPit = selectedPit;
+	}
 
     /**
      * Sets the number of stones to put in the pits at the beginning of the game
