@@ -137,10 +137,13 @@ public class MancalaBoard {
 	 * per selection.
 	 */
 	public void undo() {
-		if (getTurn().getNumUndos() < 3 && getTurn().getSelectedPit() != -1) {
-			//undo the selection
+		int numUndos=getTurn().getNumUndos();
+		if (numUndos < 3 && getTurn().getSelectedPit() != -1) {
+			getTurn().setSelectedPit(-1);
+			getTurn().setNumUndos(++numUndos);
+			System.out.println("Move undone"); 
 		} else {
-			//tell player they can't undo
+			System.out.println("Max number of undos used for this turn");
 		}
 	}
 
