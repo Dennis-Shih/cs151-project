@@ -9,13 +9,29 @@ import javax.swing.JComponent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Team Project MancalaView.java file
+ *
+ * @author Dennis Shih, Umesh Singh, Aung Paing Soe
+ * @version 1.0 5/5/2023
+ */
+
+/**
+ * A Java class that draws the whole mancala board game application
+ */
 public class MancalaView extends JComponent implements ChangeListener
 {
 	private ArrayList<Pit> pits;
 	private int stones[];
 	private MancalaBoardShape board;
 	private MancalaModel model;
-	
+
+	/**
+	 * Constructor that draws the whole mancala game application
+	 *
+	 * @param board the board object that draws the board of the mancala game
+	 * @param model the model object that manages the functions of the game
+	 */
 	public MancalaView(MancalaBoardShape board, MancalaModel model)
 	{
 		this.pits = new ArrayList<Pit>();
@@ -39,19 +55,32 @@ public class MancalaView extends JComponent implements ChangeListener
 			}
 		});
 	}
-	
+
+	/**
+	 * Starts the game and notifies the model of the status
+	 */
 	public void startGame()
 	{
 		this.setVisible(true);
 		model.setStatus(GameStatus.IN_PROGRESS);
 	}
-	
+
+	/**
+	 * Sets the board to a particular style
+	 *
+	 * @param board the board to set the style to
+	 */
 	public void setBoard(MancalaBoardShape board)
 	{
 		this.board = board;
 		this.refresh();
 	}
-	
+
+	/**
+	 * Draws the main frame of the application
+	 *
+	 * @param g the <code>Graphics</code> object to protect
+	 */
 	public void paintComponent(Graphics g)
 	{
 		Graphics2D graphic = (Graphics2D) g;
@@ -95,7 +124,10 @@ public class MancalaView extends JComponent implements ChangeListener
 		{
 		}
 	}
-	
+
+	/**
+	 * Refreshes the board of the game when a new turn has occurred
+	 */
 	public void refresh()
 	{
 		pits = new ArrayList<Pit>();
@@ -158,12 +190,22 @@ public class MancalaView extends JComponent implements ChangeListener
 		this.addPit(p0);
 		this.addPit(p6);
 	}
-	
+
+	/**
+	 * Adds a new pit to the game
+	 *
+	 * @param pit the new pit to add to
+	 */
 	public void addPit(Pit pit)
 	{
 		this.pits.add(pit);
 	}
-	
+
+	/**
+	 * Sets the stones in each of the pit to a new number when a turn has occurred
+	 *
+	 * @param e the ChangeEvent object that is created when a user moves the stones
+	 */
 	public void stateChanged(ChangeEvent e) 
 	{
 		this.refresh();

@@ -1,12 +1,12 @@
 import javax.swing.JFrame;
-
-
 /**
  * Group Project MancalaTest.java File
  *
  * @author Aung Paing Soe, Dennis Shih, Umesh Singh
  * @version 1.0 5/5/2023
+**/
 
+/**
  * A Java class that tests all the methods created in the application of a mancala game.
  * 
  * Game starts with 4 stones in each pit.
@@ -20,10 +20,13 @@ import javax.swing.JFrame;
  * * Repeat with Player B's turn.
  *   
  * Game ends when all 6 pits on one side are empty.
- 
  */
 public class MancalaTest 
 {
+	/**
+	 * A main method that runs the mancala game application
+	 * @param args Command-line arguments
+	 */
 	public static void main(String args[])
 	{
 		MainBoardView mbv = new MainBoardView();

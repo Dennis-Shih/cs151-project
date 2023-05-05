@@ -3,6 +3,16 @@ import java.util.ArrayList;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Team Project MancalaModel.java file
+ *
+ * @author Dennis Shih, Umesh Singh, Aung Paing Soe
+ * @version 1.0 5/5/2023
+ */
+
+/**
+ * A Java class the models the functions of a mancala board game
+ */
 public class MancalaModel 
 {
 	private ArrayList<ChangeListener> listeners;
@@ -14,7 +24,10 @@ public class MancalaModel
 	private boolean lastStoneEndedInMancala;
 	private int stonesInPitsBeforePreviousMove[];
 	private boolean canBeUndoed;
-	
+
+	/**
+	 * Constructs the MancalaModel object by initializing underlying data structures and instance variables
+	 */
 	public MancalaModel()
 	{
 		listeners = new ArrayList<ChangeListener>();
@@ -27,7 +40,11 @@ public class MancalaModel
 		stonesInPitsBeforePreviousMove = new int[14];
 		canBeUndoed = false;
 	}
-	
+
+	/**
+	 *
+	 * @param pit
+	 */
 	public void makeMove(int pit)
 	{
 		saveCurrentMove();
@@ -75,7 +92,11 @@ public class MancalaModel
 		
 		Notify();
 	}
-	
+
+	/**
+	 *
+	 * @param lastPit
+	 */
 	public void considerLastStonePosition(int lastPit)
 	{
 		if((isThisPitMancala(lastPit) == true) && (whichPlayersPit(lastPit) == gamePlayer))
@@ -109,12 +130,18 @@ public class MancalaModel
 			this.switchPlayer();
 		}
 	}
-	
+
+	/**
+	 * Saves a player's current turn so that an undo can be used if a player wishes to do so
+	 */
 	public void saveCurrentMove()
 	{
 		stonesInPitsBeforePreviousMove = currentStonesinPits.clone();
 	}
-	
+
+	/**
+	 * Undoes a player's moves when a player clicks the UNDO button
+	 */
 	public void makeUndoMove()
 	{
 		if(canBeUndoed == false)
@@ -176,7 +203,12 @@ public class MancalaModel
 			this.Notify();
 		}
 	}
-	
+
+	/**
+	 * Sets the number of stones in each pit before the game begins
+	 *
+	 * @param numberOfStones the number of stones in each pit to start the game off
+	 */
 	public void setInitialStones(int numberOfStones)
 	{
 		for(int i = 0; i <= 12; i++)
@@ -189,7 +221,13 @@ public class MancalaModel
 		}
 		Notify();
 	}
-	
+
+	/**
+	 * Checks whether a certain pit is the mancala of either player
+	 *
+	 * @param p the pit index
+	 * @return a boolean value of true if it is mancala, otherwise false
+	 */
 	public boolean isThisPitMancala(int p)
 	{
 		if((p == 6) || (p == 13))
@@ -198,12 +236,20 @@ public class MancalaModel
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Attaches ChangeListener to this MancalaModel object to connect the model with the view
+	 *
+	 * @param cl the ChangeListener to add
+	 */
 	public void attachListener(ChangeListener cl)
 	{
 		listeners.add(cl);
 	}
-	
+
+	/**
+	 * Notifies the ChangeListeners after a mutated event has occurred in the model
+	 */
 	public void Notify()
 	{
 		for(ChangeListener cl : listeners)
@@ -211,7 +257,13 @@ public class MancalaModel
 			cl.stateChanged(new ChangeEvent(this));
 		}
 	}
-	
+
+	/**
+	 * Return the scores of the player
+	 *
+	 * @param p the player of the game
+	 * @return the score of that particular player
+	 */
 	public int score(MancalaPlayers p)
 	{
 		if(p == MancalaPlayers.P1)
@@ -229,7 +281,13 @@ public class MancalaModel
 			return 0;
 		}
 	}
-	
+
+	/**
+	 * Checks whether the pit is a playable pit
+	 *
+	 * @param p the pit index
+	 * @return a boolean value of true if it can be played; false otherwise
+	 */
 	public boolean isThePitPlayable(int p)
 	{
 		if(status == GameStatus.STARTED || status == GameStatus.FINISHED)
@@ -254,12 +312,23 @@ public class MancalaModel
 		
 		return true;
 	}
-	
+
+	/**
+	 * Returns the status of the game
+	 *
+	 * @return the status of the game
+	 */
 	public GameStatus getStatus()
 	{
 		return status;
 	}
-	
+
+	/**
+	 * Returns the pit that is exactly opposite of a certain pit
+	 *
+	 * @param p the pit index to check its opposite
+	 * @return the pit index that is directly opposite
+	 */
 	public int pitDirectlyOppostiteToAPit(int p)
 	{
 		if(p == 6 || p == 13 || p < 0 || p > 13)
@@ -268,7 +337,13 @@ public class MancalaModel
 		}
 		return (12 - p);
 	}
-	
+
+	/**
+	 * Determines which player's pit a certain pit index is
+	 *
+	 * @param p the pit index
+	 * @return The player that corresponds to that certian pit index
+	 */
 	public MancalaPlayers whichPlayersPit(int p)
 	{
 		if((p >= 0) && (p <= 6))
@@ -286,17 +361,32 @@ public class MancalaModel
 			return null;
 		}
 	}
-	
+
+	/**
+	 * Returns the players of this game
+	 *
+	 * @return The players of this game
+	 */
 	public MancalaPlayers getGamePlayer()
 	{
 		return gamePlayer;
 	}
-	
+
+	/**
+	 * Returns the number stones in each pit for all the pits in the game
+	 *
+	 * @return An array that has the number of stones in each pit
+	 */
 	public int[] getCurrentStonesinPits()
 	{
 		return currentStonesinPits;
 	}
-	
+
+	/**
+	 * Sets the status of the game
+	 *
+	 * @param status the new status to set the game to
+	 */
 	public void setStatus(GameStatus status)
 	{
 		if(status == GameStatus.STARTED || status == GameStatus.IN_PROGRESS || status == GameStatus.FINISHED)
@@ -304,7 +394,10 @@ public class MancalaModel
 			this.status = status;
 		}
 	}
-	
+
+	/**
+	 * Switches the turn to the next player after a player's turn is over
+	 */
 	public void switchPlayer()
 	{
 		if(gamePlayer == MancalaPlayers.P1)
@@ -320,7 +413,10 @@ public class MancalaModel
 			return;
 		}
 	}
-	
+
+	/**
+	 * Places the remaining stones in the pit to the player's mancala at the end of the game
+	 */
 	public void placeRemainingStonesWhenTheGameEnds()
 	{
 		for(int i = 0; i <= 5; i++)
@@ -334,7 +430,12 @@ public class MancalaModel
 			currentStonesinPits[j] = 0;
 		}
 	}
-	
+
+	/**
+	 * Checks whether the game is over
+	 *
+	 * @return a boolean value of true if it is over; false otherwise
+	 */
 	public boolean isGameOver()
 	{
 		int stonesInP1Pits = 0;

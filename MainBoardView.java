@@ -1,17 +1,30 @@
 import java.awt.BorderLayout;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Team Project MainBoardView.java File
+ *
+ * @author Dennis Shih, Umesh Singh, Aung Paing Soe
+ * @version 1.0 5/5/2023
+ */
+
+/**
+ * A Java class that draws the mancala board of the game
+ */
 public class MainBoardView extends JFrame
 {
 	private boolean isBoardVisible;
 	private MancalaView view;
 	private MancalaModel model;
-	
+
+	/**
+	 * Constructor that draws the mancala board of the game according to the number of stones and the
+	 * specific background of the board, which is given by the user
+	 */
 	public MainBoardView()
 	{
 		isBoardVisible = true;
@@ -155,7 +168,13 @@ public class MainBoardView extends JFrame
 		this.add(bottom, BorderLayout.SOUTH);
 		this.setElementVisible(bottom, false);
 	}
-	
+
+	/**
+	 * Sets certain elements of GUI visible on the application based on the user input
+	 *
+	 * @param element the element to make it visible
+	 * @param isVisible a boolean variable to set the element visible
+	 */
 	public void setElementVisible(JPanel element, boolean isVisible)
 	{
 		element.setVisible(isVisible);
