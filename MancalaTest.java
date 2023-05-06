@@ -32,7 +32,7 @@ public class MancalaTest
 		MainBoardView mbv = new MainBoardView();
 		mbv.setVisible(true);
 		mbv.setTitle("MANCALA GAME");
-		mbv.setSize(800, 500);
+		mbv.setSize(850, 500);
 		mbv.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

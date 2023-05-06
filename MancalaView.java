@@ -115,7 +115,7 @@ public class MancalaView extends JComponent implements ChangeListener
 		
 		else if(model.getStatus() == GameStatus.FINISHED)
 		{
-			final_msg = "GAME ENDED!" + "     " + "Final Scores: " + "   " + "Player 1: " + model.score(MancalaPlayers.P1) + "     " + "Player 2: " + model.score(MancalaPlayers.P2);
+			final_msg = "GAME ENDED!" + "   " + "Final Scores: " + "  " + "Player 1: " + model.score(MancalaPlayers.P1) + "   " + "Player 2: " + model.score(MancalaPlayers.P2);
 			graphic.setColor(Color.BLACK);
 			graphic.drawString(final_msg, 100, 225);
 		}
